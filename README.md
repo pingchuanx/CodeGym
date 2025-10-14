@@ -7,6 +7,8 @@
 <p align="center">
   <a href="https://creativecommons.org/licenses/by-nc/4.0/"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg" alt="License: CC BY-NC 4.0"></a>
   <a href="https://arxiv.org/abs/2509.17325"><img src="https://img.shields.io/badge/arXiv-2509.17325-b31b1b.svg" alt="arXiv"></a>
+  <a href="https://huggingface.co/datasets/VanishD/CodeGym"><img src="https://img.shields.io/badge/HuggingFace-Dataset-yellow.svg?logo=huggingface&logoColor=white" alt="Hugging Face Dataset">
+</a>
 </p>
 
 > **Weihua Du, Hailei Gong, Zhan Ling, Kang Liu, Lingfeng Shen, Xuesong Yao, Yufei Xu, Dingyuan Shi, Yiming Yang, Jiecao Chen**  
@@ -21,9 +23,7 @@ We are open-sourcing the following key parts of the project:
 - **CodeGym environment synthesis pipeline**: refer to `gym/README.md` for details.
 - **Server** for launching CodeGym environments aimed at **large-scale reinforcement learning**: refer to `online_server/README.md` for details.
 
-> 🚀 Coming Soon: We will release the following components for the project. Stay tuned for updates!
-
-- [ ] Release the CodeGym dataset
+A community reproduction of the **synthetic dataset** is available at [HuggingFace](https://huggingface.co/datasets/VanishD/CodeGym).
 
 ## Overview
 
