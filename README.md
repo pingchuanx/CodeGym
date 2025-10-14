@@ -18,8 +18,8 @@ CodeGym is a synthetic environment generation framework for LLM agent reinforcem
 
 We are open-sourcing the following key parts of the project:
 
-- CodeGym environment synthesis pipeline: refer to `gym/README.md` for details.
-- Server for launching CodeGym environments aimed at large-scale reinforcement learning: refer to `online_server/README.md` for details.
+- **CodeGym environment synthesis pipeline**: refer to `gym/README.md` for details.
+- **Server** for launching CodeGym environments aimed at **large-scale reinforcement learning**: refer to `online_server/README.md` for details.
 
 > 🚀 Coming Soon: We will release the following components for the project. Stay tuned for updates!
 
