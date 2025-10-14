@@ -20,7 +20,7 @@ CodeGym is a synthetic environment generation framework for LLM agent reinforcem
 
 - [x] Release the generation pipeline
 - [ ] Release the CodeGym dataset
-- [ ] Release the environment server
+- [x] Release the environment server
 
 ## Overview
 
