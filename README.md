@@ -85,13 +85,10 @@ This project and dataset are released under the [Creative Commons Attribution-No
 If you find this work useful, please cite our paper:
 
 ```bibtex
-@misc{du2025generalizableendtoendtooluserl,
-      title={Generalizable End-to-End Tool-Use RL with Synthetic CodeGym}, 
-      author={Weihua Du and Hailei Gong and Zhan Ling and Kang Liu and Lingfeng Shen and Xuesong Yao and Yufei Xu and Dingyuan Shi and Yiming Yang and Jiecao Chen},
-      year={2025},
-      eprint={2509.17325},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2509.17325}, 
+@article{du2025generalizable,
+  title={Generalizable End-to-End Tool-Use RL with Synthetic CodeGym},
+  author={Du, Weihua and Gong, Hailei and Ling, Zhan and Liu, Kang and Shen, Lingfeng and Yao, Xuesong and Xu, Yufei and Shi, Dingyuan and Yang, Yiming and Chen, Jiecao},
+  journal={arXiv preprint arXiv:2509.17325},
+  year={2025}
 }
 ```
