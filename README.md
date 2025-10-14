@@ -12,11 +12,11 @@
 > **Weihua Du, Hailei Gong, Zhan Ling, Kang Liu, Lingfeng Shen, Xuesong Yao, Yufei Xu, Dingyuan Shi, Yiming Yang, Jiecao Chen**  
 > ["Generalizable End-to-End Tool-Use RL with Synthetic CodeGym" (2025)](https://arxiv.org/abs/2509.17325)
 
-CodeGym is a synthetic environment generation framework for LLM agent reinforcement learning on tool-use tasks. It automatically converts static code problems into interactive CodeGym environments where agents can learn to use tools to solve complex tasks in various configurations.
+CodeGym is a synthetic environment generation framework for LLM agent reinforcement learning on multi-turn tool-use tasks. It automatically converts static code problems into interactive CodeGym environments where agents can learn to use tools to solve complex tasks in various configurations.
 
 ## Key Components
 
-We open-source the following key parts of the project:
+We are open-sourcing the following key parts of the project:
 
 - CodeGym environment synthesis pipeline: refer to `gym/README.md` for details.
 - Server for launching CodeGym environments aimed at large-scale reinforcement learning: refer to `online_server/README.md` for details.
