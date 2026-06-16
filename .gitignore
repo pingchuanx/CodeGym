@@ -153,3 +153,14 @@ Thumbs.db
 *.temp
 
 *.pdf
+
+# --- Large data & model artifacts (NOT committed; fetch separately, see docs/HANDOFF.md) ---
+# HuggingFace dataset VanishD/CodeGym (~1.3G); download into data/codegym_hf/
+data/
+*.parquet
+# Model weights / LoRA adapters
+*.safetensors
+*.bin
+training/output/lora_adapter/
+# Online-server environments (download from HuggingFace per online_server/README.md)
+online_server/online_server/envs/

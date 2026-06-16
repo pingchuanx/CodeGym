@@ -16,7 +16,8 @@ def hf_download(
     repo_id: Optional[str] = None,
     hf_token: Optional[str] = None,
     local_dir: Optional[str] = None,
-    upload_hdfs_path: Optional[str] = None, 
+    upload_hdfs_path: Optional[str] = None,
+    repo_type: Optional[str] = None,
 ) -> None:
     from huggingface_hub import snapshot_download
 
@@ -26,6 +27,7 @@ def hf_download(
     try:
         snapshot_download(
             repo_id,
+            repo_type=repo_type,
             local_dir=f"{local_dir}/{repo_id}",
             local_dir_use_symlinks=False,
             token=hf_token,
@@ -63,5 +65,10 @@ if __name__ == "__main__":
         "--hf_token", type=str, default=None, help="HuggingFace API token."
     )
     parser.add_argument("--upload_hdfs_path", type=str, default=None, help="HDFS path to upload to.")
+    parser.add_argument(
+        "--repo_type", type=str, default=None,
+        help="HuggingFace repo type. Use 'dataset' for the CodeGym dataset "
+             "(VanishD/CodeGym); leave unset (default 'model') for model checkpoints.",
+    )
     args = parser.parse_args()
-    hf_download(args.repo_id, args.hf_token, args.local_dir, args.upload_hdfs_path)
+    hf_download(args.repo_id, args.hf_token, args.local_dir, args.upload_hdfs_path, args.repo_type)

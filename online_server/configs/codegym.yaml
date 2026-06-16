@@ -1,0 +1,62 @@
+# veRL 工具配置：通过桥接 shim 驱动 CodeGym 在线环境
+# =====================================================
+#
+# 配合 online_server/verl_bridge_server.py 使用。该 shim 把 CodeGym 的
+# 「两级 manager + session」服务，适配成 veRL `GenericHttpEnvTool` 期望的
+# 「单级 env_id + RESTful」协议。
+#
+# env_type 设为 "codegym"，registry 未注册该名字 → 自动 fallback 到
+# GenericAgentGymAdapter（见 verl/earl_http_env/registry.py），因此**无需改动 veRL**。
+#
+# 动作格式：generic adapter 暴露一个名为 `codegym_call` 的工具，模型在其 `action`
+# 字段中放入 CodeGym 的函数调用 JSON 字符串，例如：
+#     codegym_call(action='{"name":"Observe","parameters":{}}')
+# shim 的 /step 会把该字符串原样交给 CodeGym env.step，并回填 reward/done。
+#
+# 每条训练样本要运行哪个环境，由其 ability 串
+#   codegym_v1@<code_id>__<EnvName>@{json任务参数}
+# 决定；需由 agent loop 在调用工具 create 时通过 create_kwargs.create_payload
+# 透传给 shim（字段名 env_str 或 ability 均可被 shim 识别）。
+
+tools:
+  - class_name: "verl.earl_http_env.generic_env_tool.GenericHttpEnvTool"
+    config:
+      type: native
+      env_type: "codegym"
+      # 指向桥接 shim（verl_bridge_server.py 的监听地址），按实际部署修改
+      base_url: "http://127.0.0.1:8200"
+      timeout: 60.0
+
+      # —— 端点：与 verl_bridge_server.py 暴露的路由一一对应 ——
+      create_endpoint: "/create"
+      reset_endpoint: "/reset"
+      step_endpoint: "/step"
+      close_endpoint: "/close"
+      observation_endpoint: "/observation"
+      available_actions_endpoint: "/available_actions"
+
+      # shim 的 create 返回 {"env_id":..,"id":..}，step 用 {"id":env_id,...}
+      env_id_field: "id"
+
+      # 生命周期：create 后无需再 reset（CodeGym /start 已含 reset），
+      # 但保留 auto_reset=true 以命中缓存的初始 observation；reset_payload 留空。
+      create_kwargs:
+        auto_reset: true
+        # 注意：真实 env_str/ability 是 per-sample 的，由数据集透传覆盖，
+        # 这里仅作占位/默认，可留空。
+        create_payload: {}
+
+      # CodeGym reward/done 已由 shim 回填进 step 响应，无需额外刷新
+      refresh_observation: false
+      refresh_available_actions: false
+      # CodeGym 不枚举可用动作（由 prompt 内嵌函数文档约束），关闭严格校验
+      strict_action_validation: false
+      # CodeGym 是终局 0/1 奖励：用 last（每步 shim 返回当前 env.reward）
+      reward_mode: "last"
+      # 单 episode 最大工具交互轮数（与 plugin_call_max_round 协调，按需调整）
+      max_turns: 30
+      # release 时调用 /close（归还 manager 实例 + 通知 worker stop）
+      close_on_release: true
+
+      # generic adapter 暴露的工具名（模型据此发起调用）
+      tool_name: "codegym_call"
